@@ -1,0 +1,49 @@
+version: "3.8"
+
+services:
+  api: &api
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    container_name: api
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./.env
+    volumes:
+      - .:/app
+      - /app/node_modules
+    depends_on:
+      - db
+      - redis
+    networks:
+      - default-network
+
+  db:
+    image: mysql:8.0
+    cap_add:
+      - SYS_NICE
+    restart: always
+    ports:
+      - '3306:3306'
+    volumes:
+      - db:/var/lib/mysql
+    env_file:
+      - ./.env
+    networks:
+      - default-network
+
+  redis:
+    image: redis:alpine3.16
+    ports:
+      - "6379:6379"
+    networks:
+      - default-network
+
+
+volumes:
+  db:
+
+networks:
+  default-network:
+    driver: bridge

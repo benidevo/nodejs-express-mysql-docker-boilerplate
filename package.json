@@ -1,0 +1,42 @@
+{
+  "name": "nodejs-express-mysql-docker-boilerplate",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "migrate:run": "knex migrate:latest --knexfile src/shared/knex/knexfile.js",
+    "migrate:down": "knex migrate:down --knexfile src/shared/knex/knexfile.js",
+    "build": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files",
+    "start": "node dist/shared/server.js",
+    "dev": "ts-node-dev --respawn --transpile-only --ignore-watch node_modules src/shared/server.ts"
+  },
+  "dependencies": {
+    "@types/express": "^4.17.14",
+    "celebrate": "^15.0.1",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "express-async-errors": "^3.1.1",
+    "helmet": "^6.0.0",
+    "ioredis": "^5.2.3",
+    "jsonwebtoken": "^8.5.1",
+    "knex": "^2.3.0",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1",
+    "mysql": "^2.18.1",
+    "rate-limiter-flexible": "^2.3.11"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.12",
+    "@types/jsonwebtoken": "^8.5.9",
+    "@types/morgan": "^1.9.3",
+    "@types/multer": "^1.4.7",
+    "@types/node": "^18.8.4",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "prettier": "^2.7.1",
+    "ts-node": "^10.9.1",
+    "ts-node-dev": "^2.0.0",
+    "tsconfig-paths": "^4.1.0",
+    "typescript": "^4.8.4"
+  }
+}
